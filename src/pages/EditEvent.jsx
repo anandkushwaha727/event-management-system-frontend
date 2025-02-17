@@ -17,7 +17,7 @@ const EditEvent = () => {
     // Fetch event data to pre-fill the form
     const fetchEvent = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/v1/events/${eventId}`);
+        const response = await axios.get(`https://event-management-system-backend-sf2n.onrender.com/api/v1/events/${eventId}`);
         if (response.data.success) {
             console.log("Fetched Event:", response.data.event); // Debugging log
           setFormData({
