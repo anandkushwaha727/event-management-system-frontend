@@ -126,32 +126,36 @@ const Dashboard = () => {
 
       <h2>Available Events</h2>
       {events.length > 0 ? (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {events.map((event) => (
-        <div key={event._id} className="relative border p-4 rounded shadow-md">
-          <EventCard event={event} />
-    
-          {/* ✅ Edit & Delete Buttons (Only if user is the event creator) */}
-          {user && user._id === event.createdBy && (
-            <div className="mt-2">
-            <button
-              onClick={() => handleEditEvent(event._id)}
-              className="btn btn-primary me-2"
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handleDeleteEvent(event._id)}
-              className="btn btn-danger"
-            >
-              Delete
-            </button>
-          </div>
-          
-          )}
-        </div>
-      ))}
-    </div>
+     <div className="container mt-4">
+     <div className="row">
+       {events.map((event) => (
+         <div key={event._id} className="col-12 col-md-6 col-lg-4 mb-4">
+           <div className="border p-4 rounded shadow-md position-relative">
+             <EventCard event={event} />
+   
+             {/* ✅ Edit & Delete Buttons (Only if user is the event creator) */}
+             {user && user._id === event.createdBy && (
+               <div className="mt-2">
+                 <button
+                   onClick={() => handleEditEvent(event._id)}
+                   className="btn btn-primary me-2"
+                 >
+                   Edit
+                 </button>
+                 <button
+                   onClick={() => handleDeleteEvent(event._id)}
+                   className="btn btn-danger"
+                 >
+                   Delete
+                 </button>
+               </div>
+             )}
+           </div>
+         </div>
+       ))}
+     </div>
+   </div>
+   
     
       ) : (
         <p>No events available.</p>
