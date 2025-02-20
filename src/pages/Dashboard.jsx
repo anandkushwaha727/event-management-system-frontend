@@ -5,6 +5,7 @@ import { io } from "socket.io-client"; // 🔹 Import WebSocket
 import EventCard from "../components/EventCard.jsx";
 import { toast } from "react-toastify";
 import "../App.css";
+import "./event.css";
 
 
 const Dashboard = () => {
@@ -126,35 +127,24 @@ const Dashboard = () => {
 
       <h2>Available Events</h2>
       {events.length > 0 ? (
-     <div className="container mt-4">
-     <div className="row">
-       {events.map((event) => (
-         <div key={event._id} className="col-12 col-md-6 col-lg-4 mb-4">
-           <div className="border p-4 rounded shadow-md position-relative">
-             <EventCard event={event} />
-   
-             {/* ✅ Edit & Delete Buttons (Only if user is the event creator) */}
-             {user && user._id === event.createdBy && (
-               <div className="mt-2">
-                 <button
-                   onClick={() => handleEditEvent(event._id)}
-                   className="btn btn-primary me-2"
-                 >
-                   Edit
-                 </button>
-                 <button
-                   onClick={() => handleDeleteEvent(event._id)}
-                   className="btn btn-danger"
-                 >
-                   Delete
-                 </button>
-               </div>
-             )}
-           </div>
-         </div>
-       ))}
-     </div>
-   </div>
+    <div className="events-container">
+    {events.map((event) => (
+      <div key={event._id} className="event-card">
+        <EventCard event={event} />
+        {user && user._id === event.createdBy && (
+          <div className="event-actions">
+            <button onClick={() => handleEditEvent(event._id)} className="edit-btn">
+              Edit
+            </button>
+            <button onClick={() => handleDeleteEvent(event._id)} className="delete-btn">
+              Delete
+            </button>
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+  
    
     
       ) : (
